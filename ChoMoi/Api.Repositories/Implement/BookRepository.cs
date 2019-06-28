@@ -15,15 +15,32 @@ namespace ChoMoi.Api.Repositories.Implement
         public BookRepository(BookStoreContext bookStoreContext)
           : base(bookStoreContext)
         {
+            context = bookStoreContext;
         }
 
-        public List<BookViewModel> GetAllBookBuyOnlineAndBuyOffline()
+        public List<BookViewModel> GetAllBookBuyOnlineOrBuyOffline(bool isOnline, bool isOffline)
         {
             List<BookViewModel> result = new List<BookViewModel>();
-            var books = context.Book.Where(b => b.BookBuyOnlineId != null && b.BookBuyOffileId != null).ToList();
+            List<Book> books = new List<Book>();
+            if (!isOffline && !isOnline)
+            {
+                return result;
+            }
+            else if (!isOffline)
+            {
+                books = context.Book.Where(b => b.BookBuyOnlineId != null && b.BookBuyOffileId == null).ToList();
+            }
+            else if (!isOnline)
+            {
+                books = context.Book.Where(b => b.BookBuyOnlineId == null && b.BookBuyOffileId != null).ToList();
+            }
+            else {
+                books = context.Book.Where(b => b.BookBuyOnlineId != null && b.BookBuyOffileId != null).ToList();
+            }
+
             foreach(var item in books)
             {
-                BookViewModel book = new BookViewModel(item);
+                result.Add( new BookViewModel(item));
             }
             return result;
         }

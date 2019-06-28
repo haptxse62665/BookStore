@@ -15,7 +15,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ChoMoi.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class BooksController : ControllerBase
@@ -28,16 +28,18 @@ namespace ChoMoi.Controllers
         }
 
         /// <summary>
-        /// Get All Book BuyOnline and BuyOffline=
+        /// Get All Book Online or Offline
         /// </summary>
+        /// <param name="isOnline"></param>
+        /// <param name="isOffline"></param>
         /// <returns></returns>
         // GET: api/Books
         [Route("GetAllBookBuyOnlineAndBuyOffline")]
         [HttpGet]
-        public List<BookViewModel> GetAllBookBuyOnlineAndBuyOffline()
+        public List<BookViewModel> GetAllBookBuyOnlineAndBuyOffline([FromQuery]bool isOnline=false, bool isOffline=false)
         {
-            List<BookViewModel> booksViewModel = new List<BookViewModel>();
-            booksViewModel = _iBookService.GetAllBookBuyOnlineAndBuyOffline();
+            List<BookViewModel> booksViewModel = _iBookService.GetAllBookBuyOnlineOrBuyOffline(isOnline, isOffline);
+
             return booksViewModel;
         }
 

@@ -18,12 +18,35 @@ namespace ChoMoi.Api.Services.Implement
         IBookRepository bookRepository;
         public BookService(IUnitOfWork unitOfWork, IBookRepository repository) : base(unitOfWork, repository)
         {
+            bookRepository = repository;
         }
 
-        public List<BookViewModel> GetAllBookBuyOnlineAndBuyOffline()
+        public List<BookViewModel> GetAllBookBuyOnlineOrBuyOffline(bool isOnline, bool isOffline)
         {
+            //List<BookViewModel>  bookViewModels = bookRepository.GetAllBookBuyOnlineOrBuyOffline(isOnlime, isOffline);
             List<BookViewModel> bookViewModels = new List<BookViewModel>();
-            bookViewModels = bookRepository.GetAllBookBuyOnlineAndBuyOffline();
+            List<Book> books = new List<Book>();
+            if (!isOffline && !isOnline)
+            {
+                return bookViewModels;
+            }
+            else if (!isOffline)
+            {
+                books = FindBy(T => T.BookBuyOffileId == null && T.BookBuyOnlineId != null).ToList();
+            }
+            else if (!isOnline)
+            {
+                books = FindBy(T => T.BookBuyOffileId != null && T.BookBuyOnlineId == null).ToList();
+            }
+            else
+            {
+                books = FindBy(T => T.BookBuyOffileId != null && T.BookBuyOnlineId != null).ToList();
+            }
+
+            foreach (var item in books)
+            {
+                bookViewModels.Add(new BookViewModel(item));
+            }
             return bookViewModels;
         }
 

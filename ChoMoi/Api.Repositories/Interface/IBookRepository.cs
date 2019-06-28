@@ -10,6 +10,6 @@ namespace ChoMoi.Api.Repositories.Interface
 {
     public interface IBookRepository : IGenericRepository<Book>
     {
-        List<BookViewModel> GetAllBookBuyOnlineAndBuyOffline();
+        List<BookViewModel> GetAllBookBuyOnlineOrBuyOffline(bool isOnline, bool isOffline);
     }
 }
