@@ -15,9 +15,16 @@ namespace ChoMoi.Api.Services.Implement
 {
     public class BookService : EntityService<Book>, IBookService
     {
-
+        IBookRepository bookRepository;
         public BookService(IUnitOfWork unitOfWork, IBookRepository repository) : base(unitOfWork, repository)
         {
+        }
+
+        public List<BookViewModel> GetAllBookBuyOnlineAndBuyOffline()
+        {
+            List<BookViewModel> bookViewModels = new List<BookViewModel>();
+            bookViewModels = bookRepository.GetAllBookBuyOnlineAndBuyOffline();
+            return bookViewModels;
         }
 
         public List<BookViewModel> GetByCondition(RequestPagination requestPagination, List<BookViewModel> entries)

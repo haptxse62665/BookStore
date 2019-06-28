@@ -28,6 +28,20 @@ namespace ChoMoi.Controllers
         }
 
         /// <summary>
+        /// Get All Book BuyOnline and BuyOffline=
+        /// </summary>
+        /// <returns></returns>
+        // GET: api/Books
+        [Route("GetAllBookBuyOnlineAndBuyOffline")]
+        [HttpGet]
+        public List<BookViewModel> GetAllBookBuyOnlineAndBuyOffline()
+        {
+            List<BookViewModel> booksViewModel = new List<BookViewModel>();
+            booksViewModel = _iBookService.GetAllBookBuyOnlineAndBuyOffline();
+            return booksViewModel;
+        }
+
+        /// <summary>
         /// Get All Book by condition
         /// </summary>
         /// <param name="requestPagination"></param>

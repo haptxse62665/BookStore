@@ -1,5 +1,6 @@
 ﻿using Api.Repositories;
 using DemoAPI.Models;
+using DemoAPI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +10,6 @@ namespace ChoMoi.Api.Repositories.Interface
 {
     public interface IBookRepository : IGenericRepository<Book>
     {
+        List<BookViewModel> GetAllBookBuyOnlineAndBuyOffline();
     }
 }

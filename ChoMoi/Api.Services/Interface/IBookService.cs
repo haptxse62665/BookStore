@@ -13,6 +13,6 @@ namespace ChoMoi.Api.Services.Interface
     {
         PaginationViewModel<BookViewModel> GetPagination(RequestPagination requestPagination, List<BookViewModel> entries);
         List<BookViewModel> GetByCondition(RequestPagination requestPagination, List<BookViewModel> entries);
-
+        List<BookViewModel> GetAllBookBuyOnlineAndBuyOffline();
     }
 }
