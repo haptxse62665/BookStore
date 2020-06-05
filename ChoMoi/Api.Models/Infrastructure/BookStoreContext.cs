@@ -34,7 +34,7 @@ namespace DemoAPI.Models
             if (!optionsBuilder.IsConfigured)
             {
                 optionsBuilder
-                .UseSqlServer("server=DESKTOP-5EK0P25;database=BookStoreManager1;User ID=sa;password=23071997;");
+                .UseSqlServer("server=ftpse1274.database.windows.net;database=BookStoreManager1;User ID=Group1;password=123@123Aa;");
             }
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
